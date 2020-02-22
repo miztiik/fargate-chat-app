@@ -25,20 +25,20 @@ class FargateClusterStack(core.Stack):
         """
 
         chat_app_task_def = _ecs.FargateTaskDefinition(
-            self, "chatAppTaskDef", cpu=1024, memory_limit_mib=2048)
+            self, "chatAppTaskDef")
 
         chat_app_container = chat_app_task_def.add_container("chatAppContainer",
                                                              environment={
                                                                  'github': 'https://github.com/miztiik'
                                                              },
                                                              image=_ecs.ContainerImage.from_registry(
-                                                                 "236586087760.dkr.ecr.eu-west-1.amazonaws.com/ecsdemoregistry"),
+                                                                 "mystique/fargate-chat-app"),
                                                              logging=_ecs.LogDrivers.aws_logs(
                                                                  stream_prefix="Mystique")
                                                              )
 
         chat_app_container.add_port_mappings(
-            _ecs.PortMapping(container_port=8080, protocol=_ecs.Protocol.TCP)
+            _ecs.PortMapping(container_port=3000, protocol=_ecs.Protocol.TCP)
         )
 
         chat_app_service = _ecs_patterns.ApplicationLoadBalancedFargateService(
@@ -49,13 +49,9 @@ class FargateClusterStack(core.Stack):
             public_load_balancer=True,
             listener_port=80,
             desired_count=1,
-            cpu=1024,
-            memory_limit_mib=2048,
-            service_name="chatAppService",
+            # cpu=1024,
+            # memory_limit_mib=2048,
+            # service_name="chatAppService",
         )
-        output_03 = core.CfnOutput(
+        core.CfnOutput(
             self, "chatAppServiceUrl", value=f"http://{chat_app_service.load_balancer.load_balancer_dns_name}")
-        output_01 = core.CfnOutput(
-            self, "WeatherServiceUrl", value=f"http://{weather_service.load_balancer.load_balancer_dns_name}")
-        output_02 = core.CfnOutput(
-            self, "ngigxServiceUrl", value=f"http://{nginx_service.load_balancer.load_balancer_dns_name}")
