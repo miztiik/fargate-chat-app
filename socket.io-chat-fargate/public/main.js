@@ -229,7 +229,7 @@ $(function () {
   socket.on('login', function (data) {
     connected = true;
     // Display the welcome message
-    var message = "Welcome to Mystique Chat 💬";
+    var message = "Welcome to Mystique Chat";
     log(message, {
       prepend: true
     });
