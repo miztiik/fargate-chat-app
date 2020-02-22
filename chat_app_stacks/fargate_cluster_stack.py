@@ -32,7 +32,7 @@ class FargateClusterStack(core.Stack):
                                                                  'github': 'https://github.com/miztiik'
                                                              },
                                                              image=_ecs.ContainerImage.from_registry(
-                                                                 "mystique/fargate-chat-app"),
+                                                                 "mystique/fargate-chat-app:latest"),
                                                              logging=_ecs.LogDrivers.aws_logs(
                                                                  stream_prefix="Mystique")
                                                              )
