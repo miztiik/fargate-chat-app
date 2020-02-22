@@ -9,7 +9,7 @@ Let us build a serverless chat application running in AWS Fargate.
 
     - AWS CLI pre-configured - [Get help here](https://youtu.be/TPyyfmQte0U)
 
-1. ## ⚙️Setting up the environment
+1. ## ⚙️ Setting up the environment
 
     - Get the application code
 
@@ -20,7 +20,7 @@ Let us build a serverless chat application running in AWS Fargate.
 
     - Update your AWS account numbers in the `cdk.json` file. Replace `YOUR-ACCOUNT-NUMBER` with your 12-digit account number.
 
-1. ## 🚀Deployment using AWS CDK
+1. ## 🚀 Deployment using AWS CDK
 
     If you have AWS CDK installed you can close this repository and deploy the stack with,
 
@@ -41,14 +41,14 @@ Let us build a serverless chat application running in AWS Fargate.
     cdk deploy *
     ```
 
-1. ## 🔬Test the app
+1. ## 🔬 Test the app
 
     The `cdk deploy` command should provide you the application load balancer url to access the web app. _You can get the same from cloudformation outputs or in the ALB page.
 
     You should be seeing something like this,
     ![Server Chat App using Fargate](images/miztiik-fargate-chat-app_00.png)
 
-1. ## 🧹CleanUp
+1. ## 🧹 CleanUp
 
     If you want to destroy all the resources created by the stack, Execute the below command to delete the stack, or _you can delete the stack from console as well_
 
@@ -62,12 +62,12 @@ Let us build a serverless chat application running in AWS Fargate.
 
 Buy me a coffee ☕ through [Paypal](https://paypal.me/valaxy), _or_ You can reach out to get more details through [here](https://youtube.com/c/valaxytechnologies/about).
 
-### 📚References
+### 📚 References
 
 1. [Source Repo](https://github.com/socketio/socket.io/tree/master/examples/chat)
 
 1. [Docker Hub](https://hub.docker.com/repository/docker/mystique/fargate-chat-app)
 
-### ℹ️Metadata
+### ℹ️ Metadata
 
 **Level**: 200
