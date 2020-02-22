@@ -1,10 +1,13 @@
 {
   "app": "python3 app.py",
   "versionReporting": false,
-  "urls": {
-    "fargate_cdk_workshop": "https://d149n6s0tlnlgm.cloudfront.net/infrastructure/application/"
-  },
   "context": {
+    "owner": "Mystique",
+    "github_repo_url": "https://github.com/miztiik/fargate-chat-app",
+    "docker_hub_url": "https://hub.docker.com/repository/docker/mystique/fargate-chat-app/",
+    "github_profile": "https://github.com/miztiik",
+    "youtube_profile": "https://youtube.com/c/valaxytechnologies",
+    "app_name": "chat-app",
     "envs": {
       "dev": {
         "account": "822191996650",
