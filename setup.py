@@ -15,7 +15,7 @@ setuptools.setup(
 
     author="author",
 
-    package_dir={"": "fargate_chat_app"},
+    package_dir={"": "chat_app_stacks"},
     packages=setuptools.find_packages(where="fargate_chat_app"),
 
     install_requires=[

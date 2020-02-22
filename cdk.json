@@ -1,7 +1,29 @@
 {
   "app": "python3 app.py",
+  "versionReporting": false,
+  "urls": {
+    "fargate_cdk_workshop": "https://d149n6s0tlnlgm.cloudfront.net/infrastructure/application/"
+  },
   "context": {
-    "@aws-cdk/core:enableStackNameDuplicates": "true",
-    "aws-cdk:enableDiffNoFail": "true"
+    "envs": {
+      "dev": {
+        "account": "822191996650",
+        "region": "us-east-1",
+        "vpc_config": {
+          "cidr": "10.13.3.0/24",
+          "cidr_mask": 27,
+          "set_reserve": false
+        }
+      },
+      "prod": {
+        "account": "822191996650",
+        "region": "us-east-1",
+        "vpc_config": {
+          "cidr": "10.5.0.0/20",
+          "cidr_mask": 23,
+          "set_reserve": false
+        }
+      }
+    }
   }
 }
