@@ -1,0 +1,833 @@
+{
+  "Resources": {
+    "customVpcId909241C7": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.13.3.0/24",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/Resource"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet1SubnetABC68DEB": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.13.3.0/27",
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "AvailabilityZone": "us-east-1a",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1"
+          },
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "publicSubnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1/Subnet"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet1RouteTable98BD2468": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1/RouteTable"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet1RouteTableAssociation72E9B322": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIdpublicSubnetSubnet1RouteTable98BD2468"
+        },
+        "SubnetId": {
+          "Ref": "customVpcIdpublicSubnetSubnet1SubnetABC68DEB"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1/RouteTableAssociation"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet1DefaultRoute81662758": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIdpublicSubnetSubnet1RouteTable98BD2468"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "customVpcIdIGWC038BCF9"
+        }
+      },
+      "DependsOn": [
+        "customVpcIdVPCGWCADF12C5"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1/DefaultRoute"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet1NatInstanceInstanceProfile693B889D": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "customVpcIdNatRole1921374D"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1/NatInstance/InstanceProfile"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet1NatInstance073A8F32": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "AvailabilityZone": "us-east-1a",
+        "IamInstanceProfile": {
+          "Ref": "customVpcIdpublicSubnetSubnet1NatInstanceInstanceProfile693B889D"
+        },
+        "ImageId": "ami-0f482d2adde2d9206",
+        "InstanceType": "t2.micro",
+        "SecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
+              "customVpcIdNatSecurityGroupD66BD3C4",
+              "GroupId"
+            ]
+          }
+        ],
+        "SourceDestCheck": false,
+        "SubnetId": {
+          "Ref": "customVpcIdpublicSubnetSubnet1SubnetABC68DEB"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1/NatInstance"
+          }
+        ],
+        "UserData": {
+          "Fn::Base64": "#!/bin/bash"
+        }
+      },
+      "DependsOn": [
+        "customVpcIdNatRole1921374D"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet1/NatInstance/Resource"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet2SubnetBE771344": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.13.3.32/27",
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "AvailabilityZone": "us-east-1b",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet2"
+          },
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "publicSubnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet2/Subnet"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet2RouteTableB3E31886": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet2/RouteTable"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet2RouteTableAssociation7EABC563": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIdpublicSubnetSubnet2RouteTableB3E31886"
+        },
+        "SubnetId": {
+          "Ref": "customVpcIdpublicSubnetSubnet2SubnetBE771344"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet2/RouteTableAssociation"
+      }
+    },
+    "customVpcIdpublicSubnetSubnet2DefaultRoute2ECA1DB3": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIdpublicSubnetSubnet2RouteTableB3E31886"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "customVpcIdIGWC038BCF9"
+        }
+      },
+      "DependsOn": [
+        "customVpcIdVPCGWCADF12C5"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/publicSubnetSubnet2/DefaultRoute"
+      }
+    },
+    "customVpcIdappSubnetSubnet1Subnet1C87506B": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.13.3.64/27",
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "AvailabilityZone": "us-east-1a",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/appSubnetSubnet1"
+          },
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "appSubnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/appSubnetSubnet1/Subnet"
+      }
+    },
+    "customVpcIdappSubnetSubnet1RouteTable235716DC": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/appSubnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/appSubnetSubnet1/RouteTable"
+      }
+    },
+    "customVpcIdappSubnetSubnet1RouteTableAssociationA4BAA6EB": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIdappSubnetSubnet1RouteTable235716DC"
+        },
+        "SubnetId": {
+          "Ref": "customVpcIdappSubnetSubnet1Subnet1C87506B"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/appSubnetSubnet1/RouteTableAssociation"
+      }
+    },
+    "customVpcIdappSubnetSubnet1DefaultRoute95D864F5": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIdappSubnetSubnet1RouteTable235716DC"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "InstanceId": {
+          "Ref": "customVpcIdpublicSubnetSubnet1NatInstance073A8F32"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/appSubnetSubnet1/DefaultRoute"
+      }
+    },
+    "customVpcIdappSubnetSubnet2Subnet367D8F1A": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.13.3.96/27",
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "AvailabilityZone": "us-east-1b",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/appSubnetSubnet2"
+          },
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "appSubnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/appSubnetSubnet2/Subnet"
+      }
+    },
+    "customVpcIdappSubnetSubnet2RouteTable06842C36": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/appSubnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/appSubnetSubnet2/RouteTable"
+      }
+    },
+    "customVpcIdappSubnetSubnet2RouteTableAssociation920B47D5": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIdappSubnetSubnet2RouteTable06842C36"
+        },
+        "SubnetId": {
+          "Ref": "customVpcIdappSubnetSubnet2Subnet367D8F1A"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/appSubnetSubnet2/RouteTableAssociation"
+      }
+    },
+    "customVpcIdappSubnetSubnet2DefaultRoute66E2C8B3": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIdappSubnetSubnet2RouteTable06842C36"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "InstanceId": {
+          "Ref": "customVpcIdpublicSubnetSubnet1NatInstance073A8F32"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/appSubnetSubnet2/DefaultRoute"
+      }
+    },
+    "customVpcIddbSubnetSubnet1SubnetD8D7F4DF": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.13.3.128/27",
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "AvailabilityZone": "us-east-1a",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet1"
+          },
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "dbSubnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Isolated"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet1/Subnet"
+      }
+    },
+    "customVpcIddbSubnetSubnet1RouteTable6C5F4D4C": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet1/RouteTable"
+      }
+    },
+    "customVpcIddbSubnetSubnet1RouteTableAssociation94F13D10": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIddbSubnetSubnet1RouteTable6C5F4D4C"
+        },
+        "SubnetId": {
+          "Ref": "customVpcIddbSubnetSubnet1SubnetD8D7F4DF"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet1/RouteTableAssociation"
+      }
+    },
+    "customVpcIddbSubnetSubnet2Subnet22D7672A": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "CidrBlock": "10.13.3.160/27",
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "AvailabilityZone": "us-east-1b",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet2"
+          },
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "dbSubnet"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Isolated"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet2/Subnet"
+      }
+    },
+    "customVpcIddbSubnetSubnet2RouteTableD36F9463": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet2/RouteTable"
+      }
+    },
+    "customVpcIddbSubnetSubnet2RouteTableAssociation2EF0F050": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "customVpcIddbSubnetSubnet2RouteTableD36F9463"
+        },
+        "SubnetId": {
+          "Ref": "customVpcIddbSubnetSubnet2Subnet22D7672A"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/dbSubnetSubnet2/RouteTableAssociation"
+      }
+    },
+    "customVpcIdIGWC038BCF9": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/IGW"
+      }
+    },
+    "customVpcIdVPCGWCADF12C5": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        },
+        "InternetGatewayId": {
+          "Ref": "customVpcIdIGWC038BCF9"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/VPCGW"
+      }
+    },
+    "customVpcIdNatSecurityGroupD66BD3C4": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Security Group for NAT instances",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:ALL PORTS",
+            "FromPort": 0,
+            "IpProtocol": "tcp",
+            "ToPort": 65535
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId"
+          }
+        ],
+        "VpcId": {
+          "Ref": "customVpcId909241C7"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/NatSecurityGroup/Resource"
+      }
+    },
+    "customVpcIdNatRole1921374D": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": "Mystique"
+          },
+          {
+            "Key": "OwnerProfile",
+            "Value": "https://github.com/miztiik"
+          },
+          {
+            "Key": "ToKnowMore",
+            "Value": "https://youtube.com/c/valaxytechnologies"
+          },
+          {
+            "Key": "Name",
+            "Value": "chat-app-vpc-stack/customVpcId"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "chat-app-vpc-stack/customVpcId/NatRole/Resource"
+      }
+    }
+  },
+  "Outputs": {
+    "CustomVpcId": {
+      "Description": "This vpc has 2 public & 2 isolated subnets. No NATs",
+      "Value": {
+        "Ref": "customVpcId909241C7"
+      }
+    },
+    "ExportsOutputRefcustomVpcIdpublicSubnetSubnet1SubnetABC68DEB80823DED": {
+      "Value": {
+        "Ref": "customVpcIdpublicSubnetSubnet1SubnetABC68DEB"
+      },
+      "Export": {
+        "Name": "chat-app-vpc-stack:ExportsOutputRefcustomVpcIdpublicSubnetSubnet1SubnetABC68DEB80823DED"
+      }
+    },
+    "ExportsOutputRefcustomVpcIdpublicSubnetSubnet2SubnetBE7713440CC98BBC": {
+      "Value": {
+        "Ref": "customVpcIdpublicSubnetSubnet2SubnetBE771344"
+      },
+      "Export": {
+        "Name": "chat-app-vpc-stack:ExportsOutputRefcustomVpcIdpublicSubnetSubnet2SubnetBE7713440CC98BBC"
+      }
+    },
+    "ExportsOutputRefcustomVpcId909241C79F191090": {
+      "Value": {
+        "Ref": "customVpcId909241C7"
+      },
+      "Export": {
+        "Name": "chat-app-vpc-stack:ExportsOutputRefcustomVpcId909241C79F191090"
+      }
+    },
+    "ExportsOutputRefcustomVpcIdappSubnetSubnet1Subnet1C87506BFC8A7D99": {
+      "Value": {
+        "Ref": "customVpcIdappSubnetSubnet1Subnet1C87506B"
+      },
+      "Export": {
+        "Name": "chat-app-vpc-stack:ExportsOutputRefcustomVpcIdappSubnetSubnet1Subnet1C87506BFC8A7D99"
+      }
+    },
+    "ExportsOutputRefcustomVpcIdappSubnetSubnet2Subnet367D8F1AF55616AA": {
+      "Value": {
+        "Ref": "customVpcIdappSubnetSubnet2Subnet367D8F1A"
+      },
+      "Export": {
+        "Name": "chat-app-vpc-stack:ExportsOutputRefcustomVpcIdappSubnetSubnet2Subnet367D8F1AF55616AA"
+      }
+    }
+  }
+}
