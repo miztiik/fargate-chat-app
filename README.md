@@ -58,7 +58,7 @@ Let us build a serverless chat application running in AWS Fargate.
 
     This is not an exhaustive list, please carry out other necessary steps as maybe applicable to your needs.
 
-## Buy me a coffee
+## 👋 Buy me a coffee
 
 Buy me a coffee ☕ through [Paypal](https://paypal.me/valaxy), _or_ You can reach out to get more details through [here](https://youtube.com/c/valaxytechnologies/about).
 
